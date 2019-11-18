@@ -21,6 +21,7 @@
 		45061A65F5FDD3457033C546 /* Pods_TagYoutube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F2D7D1D21A9B09887B8018 /* Pods_TagYoutube.framework */; };
 		6A68E0B7F5FBD875C60A99F4 /* Pods_TagYoutubeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5DF2DA3555FF336045FAB21 /* Pods_TagYoutubeUITests.framework */; };
 		B2CDDC93240E40ACA09415E5 /* Pods_TagYoutubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E9282279CF781A5065793E /* Pods_TagYoutubeTests.framework */; };
+		D1C2D03C238258D000CD99AC /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2D03B238258D000CD99AC /* LocalData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		B2807CEF176BC9EF1A702FFD /* Pods-TagYoutubeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TagYoutubeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TagYoutubeUITests/Pods-TagYoutubeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9E9282279CF781A5065793E /* Pods_TagYoutubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagYoutubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F2D7D1D21A9B09887B8018 /* Pods_TagYoutube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagYoutube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1C2D03B238258D000CD99AC /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		E5DF2DA3555FF336045FAB21 /* Pods_TagYoutubeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagYoutubeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F268B8677FA960EAA3A966CB /* Pods-TagYoutubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TagYoutubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TagYoutubeTests/Pods-TagYoutubeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 		3749B369237FE5D6006BDCA9 /* UserData */ = {
 			isa = PBXGroup;
 			children = (
+				D1C2D03B238258D000CD99AC /* LocalData.swift */,
 			);
 			name = UserData;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				3749B36B237FE811006BDCA9 /* SearchViewController.swift in Sources */,
 				37685CA2237EBA650049C7E3 /* ViewController.swift in Sources */,
 				370D6827237FDDF500798CF6 /* Video.swift in Sources */,
+				D1C2D03C238258D000CD99AC /* LocalData.swift in Sources */,
 				37685CD3237EC2870049C7E3 /* Comments.swift in Sources */,
 				37685CA0237EBA650049C7E3 /* AppDelegate.swift in Sources */,
 			);

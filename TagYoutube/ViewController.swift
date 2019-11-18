@@ -15,6 +15,10 @@ import Alamofire_SwiftyJSON
 import AlamofireObjectMapper
 import SwiftyJSON
 class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+    //UI
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     var commentArr:[Commnet]?
     
@@ -25,11 +29,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance()?.signIn()
         
-        var url = "https://youtu.be/KoiOE5EXcoI"
+        self.searchBar.delegate = self
+    
         
-        
-        
-        
+        if let theString = UIPasteboard.general.string {
+            print("문자를 가져와버렸!!! \(theString)")
+        }
     
     }
     
@@ -58,20 +63,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 //
 //        }
         
-        let param: Parameters = ["part":"snippet",
-                                 "id":"KoiOE5EXcoI",
-                                 "key":"AIzaSyDaNppOEh7IXvmv-Su0WgW4HexUaUE0dvE"]
-        let url = "https://www.googleapis.com/youtube/v3/videos"
-        Alamofire.request(url,
-                      method: .get,
-                      parameters: param,
-                      encoding: URLEncoding.default)
-        .responseObject { (res:DataResponse<Video>) in
-            let result = res.result.value
-            result?.items?.forEach({ (item) in
-                print(item.snippet?.description)
-            })
-        }
+       
 
     }
     
@@ -87,6 +79,29 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         
     }
     
+    
 }
 
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+        self.present(searchVC!, animated: true, completion: nil)
+        return true
+    }
+}
 
+extension String {
+    var youtubeID: String? {
+        let pattern = "((?<=(v|V)/)|(?<=be/)|(?<=(\\?|\\&)v=)|(?<=embed/))([\\w-]++)"
+        
+        let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        let range = NSRange(location: 0, length: count)
+        
+        guard let result = regex?.firstMatch(in: self, range: range) else {
+            return nil
+        }
+        
+        return (self as NSString).substring(with: result.range)
+    }
+}
