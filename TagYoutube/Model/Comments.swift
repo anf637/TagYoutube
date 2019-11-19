@@ -79,6 +79,7 @@ class Commnet: Mappable {
         var authorDisplayName: String?
         var updatedAt: String?
         var textOriginal: String?
+        var authorProfileImageUrl: String?
         
         required init?(map: Map) {
             
@@ -88,6 +89,7 @@ class Commnet: Mappable {
             authorDisplayName <- map["authorDisplayName"]
             updatedAt <- map["updatedAt"]
             textOriginal <- map["textOriginal"]
+            authorProfileImageUrl <- map["authorProfileImageUrl"]
         }
     }
 }

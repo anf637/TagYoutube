@@ -11,11 +11,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        FIRApp.configure()
-        //        GIDSignIn.sharedInstance().clientID = "anf637"
-        GIDSignIn.sharedInstance().delegate = self
         
+        FIRApp.configure()
+        GIDSignIn.sharedInstance().delegate = self
         
         
         return true
@@ -58,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        return true//GIDSignIn.sharedInstance().handle(url)
+        return true
     }
     
 }

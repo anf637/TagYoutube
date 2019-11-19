@@ -39,14 +39,14 @@ class Video: Mappable {
         
         var title: String?
         var description: String?
-        ////var thumbnails: Thumbnails?
+        var thumbnails: Thumbnails?
         
         required init?(map: Map) {}
         
         func mapping(map: Map) {
             title <- map["title"]
             description <- map["description"]
-            //thumbnails <- map["thumbnails"]
+            thumbnails <- map["thumbnails.standard"]
         }
     }
     

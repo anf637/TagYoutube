@@ -12,8 +12,9 @@ target 'TagYoutube' do
     pod 'Firebase/Analytics'
     pod 'Alamofire-SwiftyJSON'
     pod 'AlamofireObjectMapper', '~> 5.2'
-
-
+    pod 'SDWebImage', '~> 4.4.5'
+    pod 'RealmSwift'
+    
   target 'TagYoutubeTests' do
     inherit! :search_paths
     # Pods for testing

@@ -6,50 +6,16 @@
 //
 
 import Foundation
+import RealmSwift
 
-
-class LocalData {
-    
-    func saveTmsPushServerType (value: PushProperty) {
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: value)
-        UserDefaults.standard.set(encodedData, forKey: "")
-        UserDefaults.standard.synchronize()
-    }
-    
-    func getTmsPushServerType() -> PushProperty? {
-        if let result = UserDefaults.standard.data(forKey: "") {
-            if let decodedData = NSKeyedUnarchiver.unarchiveObject(with: result) as? PushProperty{
-                return decodedData
-            }
-        }
-        return nil
-    }
+class DB_Snippet: Object {
+    @objc dynamic var videoId = ""
+    @objc dynamic var videoThumbnail = ""
+    @objc dynamic var videoDescription: String = ""
+    var comment = List<DB_Comment>()
 }
 
-
-class PushProperty : NSObject, NSCoding {
-    
-    var serverType: Int
-    var apiUrl: String
-    var appKey: String
-    
-    init(serverType: Int, apiUrl: String, appKey: String) {
-        self.apiUrl = apiUrl
-        self.appKey = appKey
-        self.serverType = serverType
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(serverType, forKey: "serverType")
-        aCoder.encode(apiUrl, forKey: "apiUrl")
-        aCoder.encode(appKey, forKey: "appKey")
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        let serverType = aDecoder.decodeInteger(forKey: "serverType")
-        let apiUrl = aDecoder.decodeObject(forKey: "apiUrl") as! String
-        let appKey = aDecoder.decodeObject(forKey: "appKey") as! String
-        
-        self.init(serverType: serverType, apiUrl: apiUrl, appKey: appKey)
-    }
+class DB_Comment: Object {
+    @objc dynamic var authorProfileImageUrl = ""
+    @objc dynamic var textOriginal = ""
 }

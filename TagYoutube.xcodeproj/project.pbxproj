@@ -112,12 +112,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		3749B369237FE5D6006BDCA9 /* UserData */ = {
+		3749B369237FE5D6006BDCA9 /* LocalData */ = {
 			isa = PBXGroup;
 			children = (
 				D1C2D03B238258D000CD99AC /* LocalData.swift */,
 			);
-			name = UserData;
+			name = LocalData;
 			sourceTree = "<group>";
 		};
 		37685C93237EBA640049C7E3 = {
@@ -146,7 +146,7 @@
 		37685C9E237EBA650049C7E3 /* TagYoutube */ = {
 			isa = PBXGroup;
 			children = (
-				3749B369237FE5D6006BDCA9 /* UserData */,
+				3749B369237FE5D6006BDCA9 /* LocalData */,
 				37685CD1237EC2500049C7E3 /* Model */,
 				37685C9F237EBA650049C7E3 /* AppDelegate.swift */,
 				37685CA1237EBA650049C7E3 /* ViewController.swift */,
@@ -381,6 +381,9 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -392,6 +395,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
