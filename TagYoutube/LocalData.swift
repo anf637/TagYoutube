@@ -10,9 +10,14 @@ import RealmSwift
 
 class DB_Snippet: Object {
     @objc dynamic var videoId = ""
+    @objc dynamic var videoTitle = ""
     @objc dynamic var videoThumbnail = ""
     @objc dynamic var videoDescription: String = ""
     var comment = List<DB_Comment>()
+    
+    override static func primaryKey() -> String? {
+        return "videoId"
+    }
 }
 
 class DB_Comment: Object {

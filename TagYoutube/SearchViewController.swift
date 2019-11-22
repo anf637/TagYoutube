@@ -12,29 +12,27 @@ import RealmSwift
 import SwiftyJSON
 import AlamofireObjectMapper
 
-enum PageMode {
-    case search, detail
-}
-
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchTableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchTextField: UITextField!
     
-    var pageMode: PageMode?
-    
-    var detailModeSnippet:DB_Snippet?
+    @IBOutlet weak var searchView: UIView!
     
     var searchVideoId: String?
+    var searchVideoTitle: String?
     var videoDescription: String?
     var videoImageUrl: String?
     var commentArr: [String]?
     var commentImageArr: [String]?
     
+    var searchComplete: Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchBar.delegate = self
+        self.searchComplete = false
+        self.searchTextField.becomeFirstResponder()
         
         self.searchTableView.estimatedRowHeight = 100
         self.searchTableView.rowHeight = UITableView.automaticDimension
@@ -43,39 +41,20 @@ class SearchViewController: UIViewController {
         self.commentArr = [String]()
         self.commentImageArr = [String]()
         
-        if pageMode == PageMode.search {
-            pageMode = .search
-            self.searchBar.isHidden = false
-        }else{
-            pageMode = .detail
-            self.searchBar.isHidden = true
-            
-            videoDescription = detailModeSnippet?.videoDescription
-            videoImageUrl = detailModeSnippet?.videoThumbnail
-            if let commentArr = detailModeSnippet?.comment {
-      
-                for item in commentArr {
-                    self.commentArr?.append(item.textOriginal)
-                    self.commentImageArr?.append(item.authorProfileImageUrl)
-                }
-            }
-            self.searchTableView.reloadData()
-        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
+    @IBAction func dismiss(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
     }
-    
 }
 
-extension SearchViewController: UISearchBarDelegate {
+extension SearchViewController: UITextFieldDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         self.view.endEditing(true)
         
-        if let searchVideo = searchBar.text {
+        if let searchVideo = textField.text {
             
             let group = DispatchGroup()
  
@@ -100,6 +79,7 @@ extension SearchViewController: UISearchBarDelegate {
                                 
                             self.videoDescription = item.snippet?.description
                             self.videoImageUrl = item.snippet?.thumbnails?.url
+                            self.searchVideoTitle = item.snippet?.title
                                 
                             group.leave()
 
@@ -133,10 +113,12 @@ extension SearchViewController: UISearchBarDelegate {
             
             group.notify(queue: DispatchQueue.main) {
                 print("끝")
+                self.searchComplete = true
                 self.searchTableView.reloadData()
             }
  
         }
+        return true
     }
 }
 
@@ -144,13 +126,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var index = 0
+        
         if let videoDescription = videoDescription, videoDescription.count > 0 {
             
-            if indexPath.row == index {
+            if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell", for: indexPath) as! TitleCell
-                cell.titleLabel?.text = "About..."
-                index += 1
+                cell.titleLabel?.text = "About...\n\n" + self.searchVideoTitle!
                 return cell
             }else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "VideoDescriptionCell", for: indexPath) as! VideoDescriptionCell
@@ -162,10 +143,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let commentArr = commentArr, commentArr.count > 0 {
             
-            if indexPath.row == index {
+            if indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell", for: indexPath) as! TitleCell
                 cell.titleLabel?.text = "Reply..."
-                index += 1
                 return cell
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
@@ -176,32 +156,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
         }
+        return UITableViewCell(style: .default, reuseIdentifier: "")
 
-//        if indexPath.row == 0 || indexPath.row == 2 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell", for: indexPath) as! TitleCell
-//            if indexPath.row == 0 {
-//                cell.titleLabel?.text = "About..."
-//            }else{
-//                cell.titleLabel?.text = "Reply..."
-//            }
-//            return cell
-//        }else if indexPath.row == 1 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoDescriptionCell", for: indexPath) as! VideoDescriptionCell
-//            cell.descLabel?.text = videoDescription
-//            cell.videoImage?.sd_setImage(with: URL(string: self.videoImageUrl ?? ""), completed: nil)
-//            return cell
-//        }else{
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
-//            cell.commentLabel?.text = self.commentArr?[indexPath.row - 3] ?? ""
-//            cell.commentImage?.sd_setImage(with: URL(string: self.commentImageArr?[indexPath.row - 3] ?? ""), completed: nil)
-//            cell.commentImage?.layer.cornerRadius = cell.commentImage.frame.height/2
-//            cell.commentImage?.clipsToBounds = true
-//            return cell
-//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchVideoId?.count == 0 ? 0 : 3 + (commentArr?.count)!
+        if searchComplete! {
+            return searchVideoId?.count == 0 ? 0 : 3 + (commentArr?.count)!
+        }else{
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -210,7 +174,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let alert = UIAlertController(title: "", message: "저장?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "선텍하신 정보를 저장하시겠습니까?", preferredStyle: .alert)
         let okAction  = UIAlertAction(title: "저장", style: .default) { (_) in
             if let realm = try? Realm() {
                 let db_comment = DB_Comment()
@@ -219,6 +183,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let db_snippet = DB_Snippet()
                 db_snippet.videoId = self.searchVideoId!
+                db_snippet.videoTitle = self.searchVideoTitle!
                 db_snippet.videoDescription = self.videoDescription!
                 db_snippet.videoThumbnail = self.videoImageUrl!
                 db_snippet.comment.append(db_comment)
@@ -231,9 +196,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
-        self.present(alert, animated: false, completion: nil)
         
+        if let isPresentOK = searchComplete, isPresentOK {
+            self.present(alert, animated: false, completion: nil)
+        }
     }
+
 }
 
 class TitleCell: UITableViewCell {

@@ -11,15 +11,13 @@ import UIKit
 import UIKit
 import Alamofire
 import GoogleSignIn
-//import Alamofire_SwiftyJSON
-//import AlamofireObjectMapper
 import SwiftyJSON
 import RealmSwift
 import SDWebImage
 
 class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var snippetTableView: UITableView!
     
     var snippetArr: [DB_Snippet]?
@@ -30,8 +28,11 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance()?.signIn()
-        
-        self.searchBar.delegate = self
+
+    }
+
+
+    override func viewWillAppear(_ animated: Bool) {
         
         snippetArr = [DB_Snippet]()
         let realm = try! Realm()
@@ -41,9 +42,6 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
         }
         
         self.snippetTableView.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -61,13 +59,13 @@ class ViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
 }
 
-extension ViewController: UISearchBarDelegate {
+extension ViewController: UITextFieldDelegate {
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
         self.present(searchVC!, animated: true, completion: nil)
-        return true
     }
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -92,10 +90,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
-        searchVC?.detailModeSnippet = snippetArr?[indexPath.row]
-        searchVC?.pageMode = .detail
-        self.present(searchVC!, animated: true, completion: nil)
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+        detailVC?.detailModeSnippet = snippetArr?[indexPath.row]
+        self.present(detailVC!, animated: false)
     }
 }
 

@@ -22,6 +22,7 @@
 		6A68E0B7F5FBD875C60A99F4 /* Pods_TagYoutubeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5DF2DA3555FF336045FAB21 /* Pods_TagYoutubeUITests.framework */; };
 		B2CDDC93240E40ACA09415E5 /* Pods_TagYoutubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9E9282279CF781A5065793E /* Pods_TagYoutubeTests.framework */; };
 		D1C2D03C238258D000CD99AC /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2D03B238258D000CD99AC /* LocalData.swift */; };
+		D1C67AF82384F235006CF6E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C67AF72384F235006CF6E2 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		B9E9282279CF781A5065793E /* Pods_TagYoutubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagYoutubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F2D7D1D21A9B09887B8018 /* Pods_TagYoutube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagYoutube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C2D03B238258D000CD99AC /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
+		D1C67AF72384F235006CF6E2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E5DF2DA3555FF336045FAB21 /* Pods_TagYoutubeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TagYoutubeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F268B8677FA960EAA3A966CB /* Pods-TagYoutubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TagYoutubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TagYoutubeTests/Pods-TagYoutubeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +157,7 @@
 				37685CA8237EBA650049C7E3 /* LaunchScreen.storyboard */,
 				37685CAB237EBA650049C7E3 /* Info.plist */,
 				3749B36A237FE811006BDCA9 /* SearchViewController.swift */,
+				D1C67AF72384F235006CF6E2 /* DetailViewController.swift */,
 			);
 			path = TagYoutube;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				D1C2D03C238258D000CD99AC /* LocalData.swift in Sources */,
 				37685CD3237EC2870049C7E3 /* Comments.swift in Sources */,
 				37685CA0237EBA650049C7E3 /* AppDelegate.swift in Sources */,
+				D1C67AF82384F235006CF6E2 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
