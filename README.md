@@ -59,16 +59,13 @@ root에 login이 붙으면(child ribs)에게 authtoken을 전달해줄수 있기
 ### 느낀점 
 ViewController에 비즈니스 로직과 뷰(user interaction) 코드를 넣다 보니 massive viewcontroller가 되어 유지보수에 어려움이 많았었는데, 이 섹션을 수강하고 나니 적절한 아키텍처를 잘 적용한다면 각 요소 별로 역할을 분명히 나눠 개발, 테스트, 유지보수가 용이해 질수 있다는것을 다시 한번 느낄수 있었습니다. 하지만 이 섹션에서는 시간 관계상 이론적인 내용만 설명되어 아쉬움이 있었습니다. RIBs에 관한 섹션을 공부한 후 RIBs 아키텍처를 적용한 프로젝트를 github에서 찾을 수 있었고, 코드를 보니 컨퍼런스에서 이론적인 설명을 들은것이 명확하게 이해가되어 큰 도움을 받았습니다. 해당 프로젝트에서 RIBs에 중요 요소에 관한 코드를 첨부합니다.  
 
-> Router
-
+*Router
 ![router](./image/router.jpeg)
 
-> interactor
-
+* Interactor
 ![interactor](./image/interactor.jpeg)
 
-> Builder
-
+* Builder
 ![builder](./image/builder.jpeg)
 
 
