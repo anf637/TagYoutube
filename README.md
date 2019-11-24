@@ -1,6 +1,5 @@
 
-# Ribs
-### 교육 일시:
+# MVC, MVVM, ReactorKit을 거쳐 RIB정착기
 
 ### 교육명
 Let's swift2019 (MVC, MVVM, ReactorKit을 거쳐 RIB정착기)
