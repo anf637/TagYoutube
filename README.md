@@ -72,7 +72,7 @@ ViewController에 비즈니스 로직과 뷰(user interaction) 코드를 넣다 
 # 리더십(Crash 조사 후 개선)
 
 >  푸시 수신 후 Crash 발생하는 부분을 수정
-푸시 수신 후 상세 페이지로 이동하는 함수가 재귀호출이 되는 경우가 발생하여 생긴 crash를 정상적으로 기능이 작동하도록 수정하였습니다.
+기존에 (2.1.4~2.1.7 버전)푸시 수신 후 상세 페이지로 이동하는 함수가 재귀호출이 되는 경우가 발생하여 생긴 crash를 정상적으로 기능이 작동하도록 수정하였습니다.
 
 ![fabric1](./image/fabric1.png)
-![fabric2](./image/fabric1.png)
+![fabric2](./image/fabric2.png)
